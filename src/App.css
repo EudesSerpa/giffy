@@ -1,38 +1,87 @@
+:root {
+  --results-columns: 2;
+}
+
+/* Styles Generals */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* App */
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
+  height: auto;
+  padding: 20px;
   font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: #282c34;
+  color: #fff;
 }
 
-.App-link {
-  color: #61dafb;
+.App-logo {
+  width: 150px;
+  margin-bottom: 20px;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+/* Home */
+input {
+  height: 30px;
+  line-height: 1;
+  padding: 5px 10px;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+ul li a {
+  display: inline-block;
+  color: #09A;
+  margin: 3px 0;
+  font-size: 26px;
+  text-decoration: none;
+}
+
+ul li:hover {
+  background-color: rgba(0, 100, 100, .3);
+}
+
+
+/* ListOfGifs */
+.gifs-container {
+  column-count: var(--results-columns);
+  column-gap: .5em;
+}
+
+
+
+@media (min-width: 600px) {
+  :root {
+    --results-columns: 3;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (min-width: 800px) {
+  :root {
+    --results-columns: 4;
   }
 }
