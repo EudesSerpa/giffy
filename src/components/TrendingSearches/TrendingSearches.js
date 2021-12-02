@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import getTrendingTerms from '../../services/getTrendingTermsService';
+import getTrendingTerms from 'services/getTrendingTermsService';
 import Category from "../Category";
 
 export default function TrendingSearches() {

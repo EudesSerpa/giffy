@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import ListOfGits from '../../components/ListOfGits';
-import TrendingSearches from '../../components/TrendingSearches';
-import { useGifs } from '../../hooks/useGifs';
+import ListOfGits from 'components/ListOfGifs/ListOfGits';
+import TrendingSearches from 'components/TrendingSearches';
+import { useGifs } from 'hooks/useGifs';
 
+import './styles.css';
 
 export default function Home() {
     const [keyword, setKeyword] = useState('');

@@ -1,7 +1,3 @@
-:root {
-  --results-columns: 2;
-}
-
 /* Styles Generals */
 img {
   display: block;
@@ -32,57 +28,4 @@ img {
   width: 150px;
   margin-bottom: 20px;
   cursor: pointer;
-}
-
-
-/* Home */
-input {
-  height: 30px;
-  line-height: 1;
-  padding: 5px 10px;
-  font-size: 18px;
-  outline: none;
-  border: none;
-  border-radius: 6px;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-align: left;
-}
-
-ul li a {
-  display: inline-block;
-  color: #09A;
-  margin: 3px 0;
-  font-size: 26px;
-  text-decoration: none;
-}
-
-ul li:hover {
-  background-color: rgba(0, 100, 100, .3);
-}
-
-
-/* ListOfGifs */
-.gifs-container {
-  column-count: var(--results-columns);
-  column-gap: .5em;
-  min-height: 100vh;
-}
-
-
-
-@media (min-width: 600px) {
-  :root {
-    --results-columns: 3;
-  }
-}
-
-@media (min-width: 800px) {
-  :root {
-    --results-columns: 4;
-  }
 }

@@ -1,5 +1,7 @@
 import React from 'react';
-import Gif from './Gif';
+import Gif from 'components/Gif/Gif';
+
+import './ListOfGifs.css'
 
 export default function ListOfGits({ gifs }) {
     const gifList = gifs.map(({id, title, url}) =>

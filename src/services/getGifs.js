@@ -17,8 +17,8 @@ const fromApiResponseToGifs = apiResponse => {
 }
 
 
-export default function getGifs({ keyword = 'One Piece'} = {}) {
-    const APIURL = `${API_URL}/gifs/search?api_key=${API_KEY}&q=${keyword}&limit=25&offset=0&rating=g&lang=en`;
+export default function getGifs({ limit = 25, keyword = 'One Piece', page = 0} = {}) {
+    const APIURL = `${API_URL}/gifs/search?api_key=${API_KEY}&q=${keyword}&limit=${limit}&offset=${page * limit}&rating=g&lang=en`;
 
     return fetch(APIURL)
         .then(response => response.json())

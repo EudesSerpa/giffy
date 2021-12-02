@@ -3,9 +3,11 @@ import { useEffect, useState, useRef } from 'react';
 
 export default function useNearScreen({ distance = '100px'} = {}) {
     const [isNearScreen, setIsNearScreen] = useState(false);
-    const fromRef = useRef(null);
+    const fromRef = useRef();
 
     useEffect(() => {
+        let observer;
+
         const onChange = (entries, observer) => {
             const elem = entries[0];
 
@@ -15,15 +17,20 @@ export default function useNearScreen({ distance = '100px'} = {}) {
             }
         }
 
-        const observer = new IntersectionObserver(onChange, {
-            rootMargin: distance
+        // Polyfill para IE
+        Promise.resolve(
+            typeof IntersectionObserver !== 'undefined'
+                ? IntersectionObserver
+                : import('intersection-observer')
+        ).then(() => {
+            observer = new IntersectionObserver(onChange, {
+                rootMargin: distance
+            });
+
+            observer.observe(fromRef.current);
         });
 
-        observer.observe(fromRef.current);
-
-
-        return () => observer.disconnect();
-
+        return () => observer && observer.disconnect();
     }, [])
 
     return {isNearScreen, fromRef};
