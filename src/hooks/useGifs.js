@@ -7,14 +7,18 @@ const INITIAL_PAGE = 0;
 export function useGifs({ keyword } = { keyword: null}) {
     const { gifs, setGifs } = useContext(GifsContext);
     const [page, setPage] = useState(INITIAL_PAGE);
+    const [loading, setLoading] = useState(false);
 
     // Recuperar keyword del localStorage
     const keywordToUse = keyword || localStorage.getItem('lastKeyword') || 'trending';
 
     useEffect(function() {
+        setLoading(true);
+
         getGifs({ keyword: keywordToUse })
             .then(gifs => {
                 setGifs(gifs);
+                setLoading(false);
 
                 // Guardar keyword en el localStorage
                 localStorage.setItem('lastKeyword', keyword);
@@ -29,7 +33,7 @@ export function useGifs({ keyword } = { keyword: null}) {
             .then(nextGifs => {
                 setGifs(prevGifs => prevGifs.concat(nextGifs))
             })
-    }, [keywordToUse, page])
+    }, [keywordToUse, page, setGifs])
 
-    return { gifs, setPage };
+    return { loading, gifs, setPage };
 }

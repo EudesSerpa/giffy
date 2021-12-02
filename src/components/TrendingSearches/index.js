@@ -7,7 +7,7 @@ const TrendingSearches = React.lazy(() => import('./TrendingSearches'));
 
 
 export default function LazyTrending() {
-    const {isNearScreen, fromRef} = useNearScreen({ distance: '50px'});
+    const {isNearScreen, fromRef} = useNearScreen({ distance: '0px'});
 
     return <div ref={fromRef}>
         <Suspense fallback={<Spinner />}>

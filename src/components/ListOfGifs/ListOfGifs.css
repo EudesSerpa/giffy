@@ -3,8 +3,12 @@
 }
 
 .gifs-container {
-    column-count: var(--results-columns);
-    column-gap: .5em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-rows: masonry;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
     min-height: 100vh;
 }
 

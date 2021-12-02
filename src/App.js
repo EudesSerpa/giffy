@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.css';
 
 // Router con Wounter
 import { Link, Route } from "wouter";
 // Pages
-import Home from './pages/Home/index';
 import SearchResults from './pages/SearchResults';
 import Detail from './pages/Detail';
 // Contexts
 import StaticContext from './context/StaticContext';
 import { GifsContextProvider } from './context/GifsContext';
+
+
+const HomePage = React.lazy(() => import('./pages/Home'));
 
 
 function App() {
@@ -21,26 +23,28 @@ function App() {
       dev: true
     }}>
       <div className="App">
-        <section className="App-content">
-          <Link to='/'>
-            <img style={{backgroundColor: "red"}} src="https://i.imgur.com/tqWcsZ8.png" alt="Giffy Logo" className="App-logo" />
-          </Link>
+        <Suspense fallback={null}>
+          <section className="App-content">
+            <Link to='/'>
+              <img style={{backgroundColor: "red"}} src="https://i.imgur.com/tqWcsZ8.png" alt="Giffy Logo" className="App-logo" />
+            </Link>
 
-          <GifsContextProvider>
-            <Route
-              component={Home}
-              path="/"
-              />
-            <Route
-              component={SearchResults}
-              path="/search/:keyword"
-              />
-            <Route
-              component={Detail}
-              path="/gif/:id"
-              />
-          </GifsContextProvider>
-        </section>
+            <GifsContextProvider>
+              <Route
+                component={HomePage}
+                path="/"
+                />
+              <Route
+                component={SearchResults}
+                path="/search/:keyword"
+                />
+              <Route
+                component={Detail}
+                path="/gif/:id"
+                />
+            </GifsContextProvider>
+          </section>
+        </Suspense>
       </div>
     </StaticContext.Provider>
   );
