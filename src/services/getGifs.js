@@ -1,20 +1,26 @@
+import {API_KEY, API_URL} from './settings';
 
-const APIKEY = "xiwf6ZdXNwezA2F4qVqVeKD9Pc7SUK2t";
+const fromApiResponseToGifs = apiResponse => {
+    const {data = []} = apiResponse;
+
+    if(Array.isArray(data)) {
+        const gifs = data.map(image => {
+            const { images, title, id } = image
+            const { url } = images.downsized_medium
+            return { title, id, url };
+        });
+
+        return gifs;
+    }
+
+    return [];
+}
+
 
 export default function getGifs({ keyword = 'One Piece'} = {}) {
-    const APIURL = `https://api.giphy.com/v1/gifs/search?api_key=${APIKEY}&q=${keyword}&limit=12&offset=0&rating=g&lang=en`;
+    const APIURL = `${API_URL}/gifs/search?api_key=${API_KEY}&q=${keyword}&limit=25&offset=0&rating=g&lang=en`;
 
     return fetch(APIURL)
         .then(response => response.json())
-        .then(response => {
-            const { data } = response;
-            const gifs = data.map(image => {
-                const { images, title, id } = image
-                const { url } = images.downsized_medium
-
-                return { title, id, url };
-            });
-
-            return gifs;
-        });
+        .then(fromApiResponseToGifs);
 }

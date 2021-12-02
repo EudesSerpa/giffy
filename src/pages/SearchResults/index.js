@@ -8,5 +8,13 @@ export default function SearchResults({ params }) {
 
     const { gifs } = useGifs({ keyword });
 
-    return <ListOfGits gifs={gifs} />;
+    return (
+        <React.Fragment>
+            <h3 className="App-title">
+                {decodeURI(keyword)}
+            </h3>
+
+            <ListOfGits gifs={gifs} />
+        </React.Fragment>
+    );
 }

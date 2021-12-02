@@ -2,6 +2,8 @@ import React, { useState} from "react";
 
 const Context = React.createContext({});
 
+
+// Creamos nuestro propio provider
 export function GifsContextProvider({ children }) {
     const [gifs, setGifs] = useState([]);;
 
