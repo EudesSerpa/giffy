@@ -4,9 +4,11 @@ import Spinner from 'components/Spinner';
 import { useGifs } from 'hooks/useGifs';
 import useNearScreen from 'hooks/useNearScreen';
 import debounce from 'just-debounce-it';
+import { Helmet } from 'react-helmet';
 
 export default function SearchResults({ params }) {
     const { keyword } = params;
+    const keywordFormated = decodeURI(keyword);
     const { loading, gifs, setPage } = useGifs({ keyword });
 
     const visorRef = useRef();
@@ -29,13 +31,19 @@ export default function SearchResults({ params }) {
             {loading
                 ? <Spinner />
                 : <React.Fragment>
-                    <h3 className="App-title">
-                        {decodeURI(keyword)}
-                    </h3>
+                    <Helmet>
+                        <title>{`${gifs.length} resultado de ${keywordFormated}`}</title>
+                        <meta name="description" content={keywordFormated} />
+                    </Helmet>
+                    <div className="App-wrapper">
+                        <h3 className="App-title">
+                            {keywordFormated}
+                        </h3>
 
-                    <ListOfGits gifs={gifs} />
+                        <ListOfGits gifs={gifs} />
 
-                    <div id="visor" ref={visorRef}></div>
+                        <div id="visor" ref={visorRef}></div>
+                    </div>
                 </React.Fragment>
             }
         </React.Fragment>
