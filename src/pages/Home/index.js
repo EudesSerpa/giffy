@@ -20,6 +20,7 @@ export default function Home() {
         <>
             <Helmet>
                 <title>Home | Giffy</title>
+                <link rek="canonical" href="https://giffys-search.vercel.app/" />
             </Helmet>
 
             <SearchForm onSubmit={handleSubmit} />
