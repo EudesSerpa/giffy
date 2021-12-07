@@ -5,7 +5,7 @@ import "./Category.css";
 
 function Category({name, options = []}) {
     const optionList = options.map(option => (
-        <li key={option}>
+        <li key={option} className="Category-list--item">
             <Link to={`/search/${option}`} className="Category-link">
                 { option }
             </Link>
@@ -14,12 +14,12 @@ function Category({name, options = []}) {
     ));
 
     return (
-        <div className="Category">
+        <section className="Category">
             <h3 className="Category-title">{ name }</h3>
             <ul className="Category-list">
                 { optionList }
             </ul>
-        </div>
+        </section>
     )
 }
 

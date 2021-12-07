@@ -35,7 +35,7 @@ function App() {
             <GifsContextProvider>
               <Switch>
                 <Route component={HomePage} path="/" />
-                <Route component={SearchResults} path="/search/:keyword" />
+                <Route component={SearchResults} path="/search/:keyword/:rating?/:language?" />
                 <Route component={Detail} path="/gif/:id" />
                 <Route component={NotFound} />
               </Switch>

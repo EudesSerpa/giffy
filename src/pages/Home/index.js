@@ -1,5 +1,4 @@
-import React, { useCallback } from 'react';
-import { useLocation } from 'wouter';
+import React from 'react';
 import { Helmet } from 'react-helmet';
 
 import ListOfGifs from 'components/ListOfGifs/ListOfGifs';
@@ -9,12 +8,8 @@ import SearchForm from 'components/SearchForm';
 import { useGifs } from 'hooks/useGifs';
 
 export default function Home() {
-    const [_, pushLocation] = useLocation();
     const { gifs } = useGifs();
 
-    const handleSubmit = useCallback(({keyword}) => {
-        pushLocation(`/search/${keyword}`)
-    }, [pushLocation])
 
     return (
         <>
@@ -23,7 +18,9 @@ export default function Home() {
                 <link rek="canonical" href="https://giffys-search.vercel.app/" />
             </Helmet>
 
-            <SearchForm onSubmit={handleSubmit} />
+            <header className="o-header">
+                <SearchForm />
+            </header>
 
             <div className="App-wrapper">
                 <div className="App-main">

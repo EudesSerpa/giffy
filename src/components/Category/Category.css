@@ -1,19 +1,24 @@
 .Category-title {
-    color: #fff;
+    color: var(--theme-body-txt);
     font-weight: bold;
 }
 
 .Category-list {
     display: flex;
-    justify-content: space-evenly;
     flex-wrap: wrap;
+}
+
+.Category-list--item {
+    padding: 0.3rem;
+	margin: 0.2rem;
+    font-size: 1.2rem;
 }
 
 .Category-link {
     padding: 0 10px;
     color: #fff;
     font-size: 1em;
-    transition: color ease-in .1s;
+    transition: color .1s ease-in;
 }
 .Category-link:hover {
     color: #8C55A2;
@@ -21,13 +26,15 @@
 
 
 @media screen and (min-width: 640px) {
-    .Category-list {
-        display: list-item;
+    .Category-title {
         text-align: right;
+    }
+
+    .Category-list {
+        justify-content: flex-end;
     }
 
     .Category-list li {
         display: inline-block;
     }
 }
-
