@@ -5,6 +5,17 @@ img {
   height: auto;
 }
 
+a {
+  color: #09f;
+  font-size: 32px;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
 /* App */
 .App {
@@ -26,6 +37,99 @@ img {
 
 .App-logo {
   width: 150px;
-  margin-bottom: 20px;
+  margin: 10px auto;
+  padding: 20px 0;
   cursor: pointer;
+}
+
+.App-logo img {
+  object-fit: cover;
+  width: 100%;
+}
+
+.App-title {
+  margin-top: 2rem;
+  color: var(--theme-body-txt);
+}
+
+.App-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 16px;
+  font-size: calc(10px + 2vmin);
+  color: var(--theme-body-txt);
+  background-color: var(--theme-body-bg);
+  text-align: left;
+}
+
+/* Home */
+.App-wrapper {
+  max-width: 90rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0.5em;
+}
+
+.App-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.App-results {
+  flex-shrink: 2;
+  width: 100%;
+}
+
+.App-category {
+  width: 100%;
+  margin-bottom: 25px;
+  padding: 0 20px;
+}
+
+
+/* Search Form */
+.search-input,
+.btn {
+  height: 30px;
+  line-height: 1;
+  padding: 5px 10px;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+}
+
+.btn {
+  padding: .3rem 1rem;
+  font-size: 1rem;
+  color: var(--theme-body-txt);
+  background-color: var(--brand-color_3);
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn[disabled] {
+  opacity: .3;
+  pointer-events: none;
+}
+
+.btn:hover {
+  background-color: var(--brand-color_6);
+}
+
+
+
+@media screen and (min-width: 55rem){
+  .App-main{
+    flex-direction: initial;
+  }
+
+  .App-category{
+    position: sticky;
+    top: var(--search-size-mx-h);
+    width: 40%;
+    max-width: 300px;
+  }
 }

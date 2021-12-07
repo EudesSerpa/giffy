@@ -1,10 +1,9 @@
 import React, { useCallback } from 'react';
-import { Link, useLocation } from 'wouter';
-import ListOfGits from 'components/ListOfGifs/ListOfGits';
+import { useLocation } from 'wouter';
+import ListOfGifs from 'components/ListOfGifs/ListOfGifs';
 import TrendingSearches from 'components/TrendingSearches';
 import { useGifs } from 'hooks/useGifs';
 
-import './styles.css';
 import SearchForm from 'components/SearchForm';
 
 export default function Home() {
@@ -16,13 +15,21 @@ export default function Home() {
     }, [pushLocation])
 
     return (
-        <React.Fragment>
-            <SearchForm onSubmit={handleSubmit} />
+        <>
+        <SearchForm onSubmit={handleSubmit} />
 
-            <h3 className="App-title">Última búsqueda</h3>
-            <ListOfGits gifs={gifs} />
+        <div className="App-wrapper">
+            <div className="App-main">
+                <div className="App-results">
+                    <h3 className="App-title">Última búsqueda</h3>
+                    <ListOfGifs gifs={gifs} />
+                </div>
 
-            <TrendingSearches />
-        </React.Fragment>
+                <div className="App-category">
+                    <TrendingSearches />
+                </div>
+            </div>
+        </div>
+        </>
     );
 }

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import ListOfGits from 'components/ListOfGifs/ListOfGits';
+import ListOfGits from 'components/ListOfGifs/ListOfGifs';
 import Spinner from 'components/Spinner';
 import { useGifs } from 'hooks/useGifs';
 import useNearScreen from 'hooks/useNearScreen';

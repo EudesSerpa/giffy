@@ -14,7 +14,8 @@ function SearchForm({ onSubmit }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input type="search" value={keyword} onChange={handleInput} placeholder="Search a gif here..." />
+            <input type="search" value={keyword} onChange={handleInput} placeholder="Search a gif here..." className="search-input" />
+            <input type="submit" value="Buscar" className="btn" />
         </form>
     )
 }

@@ -3,7 +3,7 @@ import Gif from 'components/Gif/Gif';
 
 import './ListOfGifs.css'
 
-export default function ListOfGits({ gifs }) {
+export default function ListOfGifs({ gifs }) {
     const gifList = gifs.map(({id, title, url}) =>
         <Gif
             key={id}
