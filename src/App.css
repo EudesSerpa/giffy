@@ -37,7 +37,7 @@ ul {
 
 .App-logo {
   width: 150px;
-  margin: 10px auto;
+  margin: 5px auto;
   padding: 20px 0;
   cursor: pointer;
 }
@@ -94,8 +94,9 @@ ul {
   position: sticky;
   top: 0;
   width: 100%;
-  max-height: var(--search-size-mx-h);
-  margin-bottom: 30px;
+  height: auto;
+  margin: 10px auto;
+  padding: 5px;
   background-color: inherit;
   z-index: var(--zIndex-header);
 }
@@ -107,6 +108,7 @@ ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 90px;
   background-color: var(--theme-body-bg);
 }
 
