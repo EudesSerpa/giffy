@@ -17,7 +17,7 @@ export function UserContextProvider({ children }) {
 
         getFavs({ jwt })
             .then(setFavs)
-    }, [jwt, favs])
+    }, [jwt])
 
 
     return (
