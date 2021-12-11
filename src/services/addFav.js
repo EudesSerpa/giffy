@@ -1,4 +1,4 @@
-const ENDPOINT = 'http://localhost:8000';
+import { ENDPOINT} from './settings';
 
 export default function addFav({ id, jwt }) {
     return fetch(`${ENDPOINT}/favs/${id}`, {

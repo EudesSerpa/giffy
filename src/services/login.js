@@ -1,4 +1,4 @@
-const ENDPOINT = 'http://localhost:8000';
+import { ENDPOINT} from './settings';
 
 export default function login({ username, password }) {
     return fetch(`${ENDPOINT}/login`, {

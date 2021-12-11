@@ -11,12 +11,17 @@ export function UserContextProvider({ children }) {
         () => window.sessionStorage.getItem("jwt")
     );
 
-
+    // Issue: Error in the fetch of the favs for CORS
     useEffect(() => {
         if(!jwt) return setFavs([]);
 
-        getFavs({ jwt })
-            .then(setFavs)
+        getFavs({jwt})
+            .then(favs => {
+                console.log(favs);
+                setFavs(favs)}
+            ).catch (error => {
+                console.log(error);
+            })
     }, [jwt])
 
 

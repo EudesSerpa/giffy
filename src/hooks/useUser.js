@@ -41,7 +41,7 @@ export default function useUser() {
     }, [setJWT]);
 
     const logout = useCallback(() => {
-        window.sessionStorage.setItem('jwt');
+        window.sessionStorage.removeItem('jwt');
         setJWT(null);
     }, [setJWT])
 
