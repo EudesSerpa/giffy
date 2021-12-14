@@ -4,7 +4,7 @@ export default function getFavs({ jwt }) {
     return fetch(`${ENDPOINT}/favs`, {
         method: 'GET',
         headers: {
-            "Authorization": jwt,
+            "Authorization": `Bearer ${jwt}`,
             "Content-Type": "application/json",
         }
     }).then(response => {

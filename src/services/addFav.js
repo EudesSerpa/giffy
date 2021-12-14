@@ -4,6 +4,7 @@ export default function addFav({ id, jwt }) {
     return fetch(`${ENDPOINT}/favs/${id}`, {
         method: 'POST',
         headers: {
+            "Authorization": `Bearer ${jwt}`,
             "Content-Type": "application/json"
         },
         body: JSON.stringify({ jwt })
