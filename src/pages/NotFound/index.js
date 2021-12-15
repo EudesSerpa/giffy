@@ -4,9 +4,10 @@ import { Helmet } from 'react-helmet';
 
 import './style.css';
 
+
 function NotFound() {
     return (
-        <>
+        <React.Fragment>
             <Helmet>
                 <title>Not found page</title>
             </Helmet>
@@ -16,7 +17,7 @@ function NotFound() {
 
                 <Link to="/">Go back ⬅</Link>
             </div>
-        </>
+        </React.Fragment>
     );
 }
 
