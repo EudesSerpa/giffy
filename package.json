@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "formik": "^2.2.9",
     "intersection-observer": "^0.12.0",
     "just-debounce-it": "^3.0.1",
     "react": "^17.0.2",
@@ -13,7 +14,8 @@
     "react-helmet": "^6.1.0",
     "react-scripts": "^4.0.3",
     "web-vitals": "^1.1.2",
-    "wouter": "^2.8.0-alpha.1"
+    "wouter": "^2.8.0-alpha.1",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "deploy": "vercel",

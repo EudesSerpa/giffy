@@ -132,6 +132,7 @@ ul {
 .btn {
   padding: .3rem 1rem;
   font-size: 1rem;
+  font-weight: 600;
   color: var(--theme-body-txt);
   background-color: var(--brand-color_3);
   border: 1px solid transparent;

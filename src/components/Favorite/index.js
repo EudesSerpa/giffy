@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "wouter";
 
 import useUser from "hooks/useUser";
+
+import Login from "components/Login";
+import Modal from "components/Modal";
 
 import './Fav.css';
 
 
 function Fav({ id }) {
+    const [showModal, setShowModal] = useState(false);
     const { isLogged, favs, addFav } = useUser();
     const [_, navigate] = useLocation();
 
@@ -18,19 +22,36 @@ function Fav({ id }) {
 
 
     const handleClick = () => {
-        if(!isLogged) return navigate("/login");
+        if(!isLogged) return setShowModal(true);
 
         addFav({ id });
         // isFaved ? deleteFav({ id }) : addFav({ id });
     }
 
+    const handleClose = () => {
+        setShowModal(false);
+    }
+
+    const handleLogin = () => {
+        setShowModal(false);
+    }
+
+
     return (
+        <>
         <button onClick={handleClick} className="gf-Fav">
-            <span aria-label={label} title={label} role='img'>
-                {emoji}
+            <span aria-label={label} title={label} role="img">
+            {emoji}
             </span>
         </button>
-    )
+
+        {showModal && (
+            <Modal onClose={handleClose}>
+                <Login onLogin={handleLogin} />
+            </Modal>
+        )}
+        </>
+    );
 }
 
 

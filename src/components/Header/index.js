@@ -15,7 +15,10 @@ function Header() {
             {
                 isLogged
                     ? <Link to="/login" onClick={logout}>Logout</Link>
-                    : <Link to="/login">Login</Link>
+                    : <>
+                        <Link to="/register">Register</Link>
+                        <Link to="/login">Login</Link>
+                    </>
             }
         </header>
     )
