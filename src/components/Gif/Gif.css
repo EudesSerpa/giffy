@@ -111,7 +111,7 @@
 @media screen and (max-width: 45rem)
 {
     .Gif:nth-child(11n + 1),
-    .Gif:nth-child(8n+1),
+    .Gif:nth-child(8n + 1),
     .Gif:nth-child(10n + 3) {
         grid-column: span 1;
         grid-row: span 1;

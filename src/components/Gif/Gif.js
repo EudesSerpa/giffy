@@ -12,6 +12,7 @@ const Gif = ({ title, id, url }) => {
             <div className="Gif-buttons">
                 <Fav id={id} />
             </div>
+            
             <Link to={`/gif/${id}`} className="Gif-link">
                 <h4>{title}</h4>
                 <img src={url} alt={title} loading="lazy" />

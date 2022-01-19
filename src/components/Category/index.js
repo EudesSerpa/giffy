@@ -1,26 +1,26 @@
 import React from "react";
-import { Link } from "wouter";
 
-import "./Category.css";
+import {
+  CategoryTitle,
+  CategoryList,
+  CategoryListItem,
+  CategoryLink,
+} from "./styles.js";
 
-function Category({name, options = []}) {
-    const optionList = options.map(option => (
-        <li key={option} className="Category-list--item">
-            <Link to={`/search/${option}`} className="Category-link">
-                { option }
-            </Link>
 
-        </li>
-    ));
+function Category({ name, options = [] }) {
+  const optionList = options.map((option, index) => (
+    <CategoryListItem key={option} index={index}>
+      <CategoryLink to={`/search/${option}`}>{option}</CategoryLink>
+    </CategoryListItem>
+  ));
 
-    return (
-        <section className="Category">
-            <h3 className="Category-title">{ name }</h3>
-            <ul className="Category-list">
-                { optionList }
-            </ul>
-        </section>
-    )
+  return (
+    <section>
+      <CategoryTitle>{name}</CategoryTitle>
+      <CategoryList>{optionList}</CategoryList>
+    </section>
+  );
 }
 
 export default Category;
