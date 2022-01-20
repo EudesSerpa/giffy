@@ -47,10 +47,9 @@ export default function useForm ({initialKeyword = '', initialLanguage = 'en', i
         keyword: initialKeyword,
         language: initialLanguage,
         rating: initialRating,
-        times: 0,
     });
 
-    const { keyword, language, rating, times } = state;
+    const { keyword, language, rating } = state;
 
 
     const updateKeyword = keyword => {
@@ -85,7 +84,6 @@ export default function useForm ({initialKeyword = '', initialLanguage = 'en', i
         keyword,
         language,
         rating,
-        times,
         updateKeyword,
         updateRating,
         updateLanguage,

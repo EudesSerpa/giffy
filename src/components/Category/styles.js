@@ -1,23 +1,11 @@
 import styled from "@emotion/styled";
 import { Link } from "wouter";
 
-import { breakpoints } from "styles";
+import { breakpoints, generateMultiColor } from "styles";
 
-
-export function generateMultiColor(props) {
-  const NEED_WHITE_COLOR = [3, 4];
-
-  const colorIndex = props.index % 5 + 1;
-  const needWhite = NEED_WHITE_COLOR.includes(colorIndex);
-  const colorText = needWhite ? "#FFF" : "var(--theme-body-bg)";
-
-  return `
-    color: ${colorText};
-    background-color: var(--brand-color_${colorIndex});
-  `;
-}
 
 export const CategoryTitle = styled.h3`
+  margin-top: 2rem;
   color: var(--theme-body-txt);
   font-weight: bold;
 
@@ -30,7 +18,7 @@ export const CategoryList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 0;
-  margin: 0;
+  margin: -.75rem 0 0;
   list-style-position: inside;
 
   ${breakpoints.greaterThanMobile} {
@@ -43,6 +31,7 @@ export const CategoryListItem = styled.li`
 	margin: 0.2rem;
   font-size: 1.2rem;
   list-style: none;
+  border-radius: 4px;
   
   ${generateMultiColor}  
 

@@ -1,77 +1,109 @@
-import useUser from "hooks/useUser";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "wouter";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+import Spinner from "components/Spinner";
+import useUser from "hooks/useUser";
 
 import "./Login.css";
 
 
+const initialValues = {
+  username: "",
+  password: "",
+};
+
+const validationSchema = Yup.object({
+  username: Yup.string()
+    .max(15, "Must be 15 characters or less")
+    .required("Required"),
+
+  password: Yup.string()
+    .min(3, "Must be 3 characters or more")
+    .required("Required"),
+});
+
 function Login({ onLogin }) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [_, navigate] = useLocation();
-    const { isLogged, login, isLoginLoading, hasLoginError } = useUser();
+  const { isLogged, login, isLoginLoading, hasLoginError, setError } =
+    useUser();
+  const [_, navigate] = useLocation();
 
+  useEffect(() => {
+    if (isLogged) {
+      navigate("/");
+      onLogin && onLogin();
+    }
+  }, [isLogged, navigate, onLogin]);
 
-    useEffect(() => {
-        if(isLogged) {
-            navigate("/");
-            onLogin && onLogin();
-        }
+  const handleSubmit = (values, { setSubmitting }) => {
+    setSubmitting(true);
+    login(values);
+    setSubmitting(false);
+  };
 
-    }, [isLogged, navigate, onLogin])
+  if (hasLoginError) {
+    setTimeout(() => setError(false), 1500);
+  }
 
+  return (
+    <>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ errors, touched }) => (
+          <Form className="form">
+            <label htmlFor="username">
+              Username
+              <ErrorMessage name="username" component="small" />
+              <Field
+                id="username"
+                type="text"
+                name="username"
+                placeholder="Username"
+                className={
+                  touched.username ? (errors.username ? "error" : "") : ""
+                }
+              />
+            </label>
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        login({ username, password });
-    };
+            <label htmlFor="password">
+              Password
+              <ErrorMessage name="password" component="small" />
+              <Field
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Password"
+                className={
+                  touched.password ? (errors.password ? "error" : "") : ""
+                }
+              />
+            </label>
 
-    const handleChangeUsername = (e) => {
-        setUsername(e.target.value);
-    };
+            {isLoginLoading ? (
+              <Spinner />
+            ) : (
+              <button type="submit" className="btn" disabled={isLoginLoading}>
+                Login
+              </button>
+            )}
 
-    const handleChangePassword = (e) => {
-        setPassword(e.target.value);
-    };
-
-
-    return (
-        <>
-            {
-                isLoginLoading
-                    ? <strong>Checking credentials...</strong>
-                    : <form onSubmit={handleSubmit} className="form">
-                        <label htmlFor="username">Username
-                            <input
-                                value={username}
-                                onChange={handleChangeUsername}
-                                type="text"
-                                id="username"
-                                name="username"
-                                placeholder="Username"
-                            />
-                        </label>
-
-                        <label htmlFor="password">Password
-                            <input
-                                value={password}
-                                onChange={handleChangePassword}
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="Password"
-                            />
-                        </label>
-
-                        <button className="btn">Login</button>
-                    </form>
-            }
-            {
-                hasLoginError && <strong>credentials are invalid</strong>
-            }
-        </>
-    );
+            {/* Messages */}
+            {hasLoginError && (
+              <div className="form-failed--text">
+                <p> Login failed
+                  <span role="img" aria-label="Register failed"> ❌ </span>
+                </p>
+              </div>
+            )}
+          </Form>
+        )}
+      </Formik>
+    </>
+  );
 }
-
 
 export default Login;

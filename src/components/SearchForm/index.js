@@ -5,7 +5,6 @@ import useForm from "./useForm";
 
 
 const RATINGS = ["g", "pg", "pg-13", "r"];
-
 const LANGUAGES = ['en', 'es', 'ja'];
 
 
@@ -14,7 +13,6 @@ function SearchForm({ initialKeyword = '', initialRating = 'g', initialLanguage 
         keyword,
         language,
         rating,
-        times,
         updateKeyword,
         updateRating,
         updateLanguage,
@@ -77,10 +75,8 @@ function SearchForm({ initialKeyword = '', initialRating = 'g', initialLanguage 
                     ))}
                 </select>
 
-                <button onClick={handleRemove} className="removeBtn" aria-label="Remove Filters" title="Remove filters ">X</button>
+                <button onClick={handleRemove} className="removeFilters" aria-label="Remove Filters" title="Remove filters ">X</button>
             </div>
-
-            {/* <small>{times}</small> */}
         </form>
     );
 }

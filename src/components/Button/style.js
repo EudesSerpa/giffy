@@ -8,8 +8,8 @@ export const Link = styled(LinkWouter)`
     padding: 8px 16px;
     font-size: 2vh;
     font-weight: 600;
-    color: var(--theme-body-txt);
-    background-color: var(--brand-color_3);
+    color: ${({theme}) => theme.colors.textColor};
+    background-color: ${({theme}) => theme.colors.primary};
     border: 1px solid transparent;
     border-radius: 6px;
     cursor: pointer;

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import getTrendingTerms from 'services/getTrendingTermsService';
+import getTrendingTerms from "services/getTrendingTermsService";
 import Category from "../Category";
 
 export default function TrendingSearches() {
-    const [trends, setTrends] = useState([]);
+  const [trends, setTrends] = useState([]);
 
-    useEffect(() => {
-        getTrendingTerms().then(setTrends);
-    }, [])
+  useEffect(() => {
+    getTrendingTerms().then(setTrends);
+  }, []);
 
-    return <Category name="Tendencias" options={trends} />
+  return <Category name="Tendencias" options={trends} />;
 }

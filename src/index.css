@@ -31,11 +31,11 @@ html {
 body {
   margin: 0;
   font-family: 'Manrope', sans-serif;
+  font-size: var(--fz);
+  color: var(--theme-body-txt);
+  background-color: var(--theme-body-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: var(--fz);
-  background-color: var(--theme-body-bg);
-  color: var(--theme-body-txt);
 }
 
 code {

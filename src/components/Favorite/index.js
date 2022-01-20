@@ -6,53 +6,50 @@ import useUser from "hooks/useUser";
 import Login from "components/Login";
 import Modal from "components/Modal";
 
-import './Fav.css';
-
+import "./Fav.css";
 
 function Fav({ id }) {
-    const [showModal, setShowModal] = useState(false);
-    const { isLogged, favs, addFav } = useUser();
-    const [_, navigate] = useLocation();
+  const [showModal, setShowModal] = useState(false);
+  const { isLogged, favs, addFav } = useUser();
+  const [_, navigate] = useLocation();
 
-    const isFaved = favs.some(favId => favId === id);
+  const isFaved = favs.some((favId) => favId === id);
 
-    const [label, emoji] = isFaved
-        ? ["Remove Gif from favorites", "❌"]
-        : ["Add Gif to favorites", "💖"];
+  const [label, emoji] = isFaved
+    ? ["Remove Gif from favorites", "❌"]
+    : ["Add Gif to favorites", "💖"];
 
+  const handleClick = () => {
+    if (!isLogged) return setShowModal(true);
 
-    const handleClick = () => {
-        if(!isLogged) return setShowModal(true);
+    addFav({ id });
+    // isFaved ? deleteFav({ id }) : addFav({ id });
+  };
 
-        addFav({ id });
-        // isFaved ? deleteFav({ id }) : addFav({ id });
-    }
+  const handleClose = () => {
+    setShowModal(false);
+  };
 
-    const handleClose = () => {
-        setShowModal(false);
-    }
+  const handleLogin = () => {
+    setShowModal(false);
+  };
 
-    const handleLogin = () => {
-        setShowModal(false);
-    }
+  return (
+    <>
+      <button onClick={handleClick} className="gf-Fav">
+        <span aria-label={label} title={label} role="img">
+          {emoji}
+        </span>
+      </button>
 
-
-    return (
-        <>
-        <button onClick={handleClick} className="gf-Fav">
-            <span aria-label={label} title={label} role="img">
-            {emoji}
-            </span>
-        </button>
-
-        {showModal && (
-            <Modal onClose={handleClose}>
-                <Login onLogin={handleLogin} />
-            </Modal>
-        )}
-        </>
-    );
+      {showModal && (
+        <Modal onClose={handleClose}>
+          <h2>Login</h2>
+          <Login onLogin={handleLogin} />
+        </Modal>
+      )}
+    </>
+  );
 }
-
 
 export default Fav;
