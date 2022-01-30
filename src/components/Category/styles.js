@@ -36,7 +36,7 @@ export const CategoryListItem = styled.li`
   ${generateMultiColor}  
 
   &:hover a {
-    transform: scale(1.1);
+    transform: scale(1.1) translateY(-1px);
   }
 
   ${breakpoints.greaterThanMobile} {
@@ -46,6 +46,8 @@ export const CategoryListItem = styled.li`
 
 export const CategoryLink = styled(Link)`
   display: inline-block;
+  width: 100%;
+  height: 100%;
   padding: 0 10px;
   color: inherit;
   font-size: 1em;

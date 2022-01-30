@@ -1,22 +1,21 @@
-import React, { Suspense } from 'react';
-import './App.css';
-
+import React, { Suspense } from "react";
 import { Link, Route, Switch } from "wouter";
 
-import Header from 'components/Header';
+import Header from "components/Header";
 
-import SearchResults from 'pages/SearchResults';
-import Detail from 'pages/Detail';
-import Login from 'pages/Login';
-import Register from 'pages/Register';
-import NotFound from 'pages/NotFound';
+import SearchResults from "pages/SearchResults";
+import { Favs } from "pages/Favs";
+import Detail from "pages/Detail";
+import Login from "pages/Login";
+import Register from "pages/Register";
+import NotFound from "pages/NotFound";
 
-import { UserContextProvider } from 'context/UserContext';
-import { GifsContextProvider } from 'context/GifsContext';
+import { UserContextProvider } from "context/UserContext";
+import { GifsContextProvider } from "context/GifsContext";
 
+import "./App.css";
 
-const HomePage = React.lazy(() => import('pages/Home'));
-
+const HomePage = React.lazy(() => import("pages/Home"));
 
 function App() {
   return (
@@ -24,17 +23,25 @@ function App() {
       <div className="App">
         <Suspense fallback={null}>
           <section className="App-content">
-          <Header />
-            <Link to='/'>
+            <Header />
+
+            <Link to="/">
               <figure className="App-logo">
-                <img src="https://i.postimg.cc/Kj523yfG/Giffy-Logo-no-BG.png" alt="Giffy Logo" />
+                <img
+                  src="https://i.postimg.cc/Kj523yfG/Giffy-Logo-no-BG.png"
+                  alt="Giffy Logo"
+                />
               </figure>
             </Link>
 
             <GifsContextProvider>
               <Switch>
                 <Route component={HomePage} path="/" />
-                <Route component={SearchResults} path="/search/:keyword/:rating?/:language?" />
+                <Route component={Favs} path="/favs" />
+                <Route
+                  component={SearchResults}
+                  path="/search/:keyword/:rating?/:language?"
+                />
                 <Route component={Detail} path="/gif/:id" />
                 <Route component={Login} path="/login" />
                 <Route component={Register} path="/register" />
@@ -47,6 +54,5 @@ function App() {
     </UserContextProvider>
   );
 }
-
 
 export default App;

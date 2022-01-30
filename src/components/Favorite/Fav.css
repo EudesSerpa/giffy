@@ -1,9 +1,9 @@
 .gf-Fav {
     width: 32px;
     height: 32px;
-    background: rgba(255, 172, 172, .3);
+    background: rgba(255, 172, 172, .35);
     border: none;
-    border-radius: 80px;
+    border-radius: 50%;
     cursor: pointer;
     transition: all .3s ease;
 }
@@ -14,6 +14,6 @@
 
 .gf-Fav span {
     display: block;
-    width: 22px;
+    width: 21px;
     font-size: 14px;
 }

@@ -10,7 +10,7 @@
 .NotFound-main h1 {
   margin: 0 auto;
   font-size: 12vh;
-  animation: pulse 2.5s ease-in-out both infinite;
+  animation: fallFading 2.5s ease-in-out both infinite;
   transform-origin: top left;
 }
 
@@ -24,7 +24,7 @@
   animation: back 1.5s ease-out infinite;
 }
 
-@keyframes pulse {
+@keyframes fallFading {
   0% {
     transform: rotate(0);
   }

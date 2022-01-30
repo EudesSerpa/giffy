@@ -6,7 +6,6 @@ import * as Yup from "yup";
 import useUser from "hooks/useUser";
 import register from "services/register";
 
-
 const initialValues = {
   username: "",
   password: "",
@@ -30,7 +29,7 @@ const validationSchema = Yup.object({
 function Register() {
   const [isSubmitted, setSubmitted] = useState(false);
   const [isError, setError] = useState(false);
-  const [_, navigate] = useLocation();  
+  const [, navigate] = useLocation();
   const { login, hasLoginError } = useUser();
 
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
@@ -39,13 +38,13 @@ function Register() {
     register(values)
       .then(() => {
         resetForm();
-        
+
         setError(false);
         setSubmitted(true);
         setSubmitting(false);
 
         login(values);
-        if(hasLoginError) {
+        if (hasLoginError) {
           navigate("/login");
         } else {
           navigate("/");
@@ -64,7 +63,6 @@ function Register() {
       });
   };
 
-  
   return (
     <>
       <Formik
@@ -103,8 +101,9 @@ function Register() {
             </label>
 
             <ErrorMessage name="acceptedTerms" component="small" />
-            <label htmlForm="acceptedTerms" className="label--check">
-              <Field id="acceptedTerms" type="checkbox" name="acceptedTerms" />I accept the terms and conditions
+            <label htmlFor="acceptedTerms" className="label--check">
+              <Field id="acceptedTerms" type="checkbox" name="acceptedTerms" />I
+              accept the terms and conditions
             </label>
 
             <button type="submit" className="btn" disabled={isSubmitting}>
@@ -114,15 +113,21 @@ function Register() {
             {/* Messages */}
             {isSubmitted && (
               <div className="form-submitted--text">
-                <p> ¡Registro éxitoso!
-                  <span role="img" aria-label="Register success"> ✅ </span>
+                <p>
+                  ¡Registro éxitoso!
+                  <span role="img" aria-label="Register success">
+                    ✅
+                  </span>
                 </p>
               </div>
             )}
             {isError && (
               <div className="form-failed--text">
-                <p> Register failed
-                  <span role="img" aria-label="Register failed"> ❌ </span>
+                <p>
+                  Register failed
+                  <span role="img" aria-label="Register failed">
+                    ❌
+                  </span>
                 </p>
               </div>
             )}

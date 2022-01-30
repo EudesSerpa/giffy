@@ -1,20 +1,22 @@
-.gf-header {
+.Nav-main {
     display: flex;
-    align-self: flex-end;
+    justify-content: flex-end;
     align-items: center;
     height: 40px;
 }
 
-.gf-header a {
+.Nav-main a {
+    display: block;
+    height: 50%;
     color: #FFF;
     font-size: 16px;
     font-weight: 600;
 }
 
-.gf-header a + a {
-    margin: 0 12px;
+.Nav-main a:last-of-type {
+    margin-left: 1em;
 }
 
-.gf-header a:hover {
-    text-decoration: underline;
+.Nav-main a:hover {
+    border-bottom: 3px solid #FFF;
 }

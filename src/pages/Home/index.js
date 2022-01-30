@@ -17,22 +17,20 @@ export default function Home() {
         <link rek="canonical" href="https://giffys-search.vercel.app/" />
       </Helmet>
 
-      <header className="headerNav">
+      <header className="headerSearchForm">
         <SearchForm />
       </header>
 
-      <div className="App-wrapper">
-        <section className="App-main">
-          <div className="App-results">
-            <h3 className="App-title">Última búsqueda</h3>
-            <ListOfGifs gifs={gifs} />
-          </div>
+      <section className="App-main App-wrapper">
+        <div className="App-results">
+          <h3 className="App-title">Última búsqueda</h3>
+          <ListOfGifs gifs={gifs} />
+        </div>
 
-          <div className="App-category">
-            <TrendingSearches />
-          </div>
-        </section>
-      </div>
+        <div className="App-category">
+          <TrendingSearches />
+        </div>
+      </section>
     </>
   );
 }

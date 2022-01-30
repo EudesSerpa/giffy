@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "wouter";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import Spinner from "components/Spinner";
+
 import useUser from "hooks/useUser";
-
-import "./Login.css";
-
 
 const initialValues = {
   username: "",
@@ -27,7 +25,7 @@ const validationSchema = Yup.object({
 function Login({ onLogin }) {
   const { isLogged, login, isLoginLoading, hasLoginError, setError } =
     useUser();
-  const [_, navigate] = useLocation();
+  const [, navigate] = useLocation();
 
   useEffect(() => {
     if (isLogged) {
@@ -91,11 +89,14 @@ function Login({ onLogin }) {
               </button>
             )}
 
-            {/* Messages */}
+            {/* Message */}
             {hasLoginError && (
               <div className="form-failed--text">
-                <p> Login failed
-                  <span role="img" aria-label="Register failed"> ❌ </span>
+                <p>
+                  Login failed
+                  <span role="img" aria-label="Register failed">
+                    ❌
+                  </span>
                 </p>
               </div>
             )}

@@ -1,9 +1,11 @@
 import React from "react";
-import Gif from "components/Gif/Gif";
-import useSingleGif from "hooks/useSingleGif";
-import Spinner from "components/Spinner";
 import { Redirect } from "wouter";
 import { Helmet } from "react-helmet";
+
+import Gif from "components/Gif/Gif";
+import Spinner from "components/Spinner";
+
+import useSingleGif from "hooks/useSingleGif";
 
 export default function Detail({ params }) {
   const { gif, isLoading, isError } = useSingleGif({ id: params.id });
@@ -14,7 +16,7 @@ export default function Detail({ params }) {
         <Helmet>
           <title>Cargando...</title>
         </Helmet>
-        
+
         <Spinner />
       </>
     );
@@ -30,8 +32,11 @@ export default function Detail({ params }) {
         <title>{gif.title} || Giffy</title>
       </Helmet>
 
-      <h3 className="App-title">{gif.title}</h3>
-      <Gif {...gif} />
+      <section className="App-wrapper App-section">
+        <h3 className="App-title">{gif.title}</h3>
+        
+        <Gif {...gif} />
+      </section>
     </>
   );
 }

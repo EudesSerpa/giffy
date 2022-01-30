@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useLocation } from "wouter";
 
 import useUser from "hooks/useUser";
 
@@ -11,7 +10,6 @@ import "./Fav.css";
 function Fav({ id }) {
   const [showModal, setShowModal] = useState(false);
   const { isLogged, favs, addFav } = useUser();
-  const [_, navigate] = useLocation();
 
   const isFaved = favs.some((favId) => favId === id);
 

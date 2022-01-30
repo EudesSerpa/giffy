@@ -18,23 +18,23 @@ export const Gifstyled = styled.article`
     ${generateBoxShadow}
   }
 
-  &:nth-child(11n + 1) {
+  &:nth-of-type(11n + 1) {
     grid-column: span 2;
     grid-row: span 2;
   }
-  &:nth-child(8n + 1) {
+  &:nth-of-type(8n + 1) {
     grid-column-end: span 2;
     grid-row-end: span 2;
   }
-  &:nth-child(10n + 3) {
+  &:nth-of-type(10n + 3) {
     grid-column: span 2;
     grid-row: span 1;
   }
 
   ${breakpoints.smallerThanDesktop} {
-    &:nth-child(11n + 1),
-    &:nth-child(8n + 1),
-    &:nth-child(10n + 3) {
+    &:nth-of-type(11n + 1),
+    &:nth-of-type(8n + 1),
+    &:nth-of-type(10n + 3) {
       grid-column: span 1;
       grid-row: span 1;
     }

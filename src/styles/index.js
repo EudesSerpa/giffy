@@ -47,6 +47,6 @@ export function generateMultiColor(props) {
   `;
 }
 
-export function generateBoxShadow(props) {
+export function generateBoxShadow() {
   return `box-shadow: 0 0 0 var(--gridList-gap) var(--brand-color_${colorIndex});`;
 }

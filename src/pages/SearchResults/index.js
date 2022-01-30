@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import debounce from "just-debounce-it";
 import { Helmet } from "react-helmet";
 
@@ -8,19 +8,25 @@ import SearchForm from "components/SearchForm";
 
 import { useGifs } from "hooks/useGifs";
 import useNearScreen from "hooks/useNearScreen";
+import ButtonBackToTop from "components/ButtonBactToTop";
 
 export default function SearchResults({ params }) {
   const { keyword, rating = "g", language = "en" } = params;
-  const { loading, loadingPage, gifs, setPage } = useGifs({ keyword, rating, language });
+  const keywordFormated = decodeURI(keyword);
   
+  const [showButton, setShowButton] = useState(false);
+  const { loading, loadingPage, gifs, setPage } = useGifs({
+    keyword,
+    rating,
+    language,
+  });
+
   const visorRef = useRef();
   const { isNearScreen } = useNearScreen({
     distance: "200px",
     externalRef: loading ? null : visorRef,
     once: false,
   });
-  
-  const keywordFormated = decodeURI(keyword);
 
   const debounceHandleNextPage = useCallback(
     debounce(() => setPage((prevPage) => prevPage + 1), 200),
@@ -28,21 +34,24 @@ export default function SearchResults({ params }) {
   );
 
   useEffect(() => {
-    if (isNearScreen) debounceHandleNextPage();
+    if (isNearScreen) {
+      debounceHandleNextPage();
+      setShowButton(true);
+    }
   }, [debounceHandleNextPage, isNearScreen]);
 
   return (
-    <React.Fragment>
+    <>
       {loading ? (
         <Spinner />
       ) : (
-        <React.Fragment>
+        <>
           <Helmet>
             <title>{`${gifs.length} resultado de ${keywordFormated}`}</title>
             <meta name="description" content={keywordFormated} />
           </Helmet>
 
-          <header className="headerNav">
+          <header className="headerSearchForm">
             <SearchForm
               initialKeyword={keywordFormated}
               initialRating={rating}
@@ -56,11 +65,12 @@ export default function SearchResults({ params }) {
             <ListOfGits gifs={gifs} />
 
             {loadingPage && <Spinner />}
+            {showButton && <ButtonBackToTop />}
 
             <div id="visor" ref={visorRef}></div>
           </div>
-        </React.Fragment>
+        </>
       )}
-    </React.Fragment>
+    </>
   );
 }
