@@ -4,6 +4,7 @@ import UserContext from "context/UserContext";
 
 import loginService from "services/login";
 import addFavService from "services/addFav";
+import deleteFav from "services/deleteFav";
 
 export default function useUser() {
   const { favs, jwt, setFavs, setJWT } = useContext(UserContext);
@@ -13,6 +14,17 @@ export default function useUser() {
   const addFav = useCallback(
     ({ id }) => {
       addFavService({ id, jwt })
+        .then(setFavs)
+        .catch((error) => {
+          console.log(error.message);
+        });
+    },
+    [jwt, setFavs]
+  );
+
+  const removeFav = useCallback(
+    ({ id }) => {
+      deleteFav({ id, jwt })
         .then(setFavs)
         .catch((error) => {
           console.log(error.message);
@@ -53,6 +65,7 @@ export default function useUser() {
     favs,
     isLogged: Boolean(jwt),
     addFav,
+    removeFav,
     login,
     logout,
     isLoginLoading: loading,

@@ -9,19 +9,18 @@ import "./Fav.css";
 
 function Fav({ id }) {
   const [showModal, setShowModal] = useState(false);
-  const { isLogged, favs, addFav } = useUser();
+  const { isLogged, favs, addFav, removeFav } = useUser();
 
   const isFaved = favs.some((favId) => favId === id);
 
   const [label, emoji] = isFaved
     ? ["Remove Gif from favorites", "❌"]
-    : ["Add Gif to favorites", "💖"];
+    : ["Add Gif to favorites", "❤️"];
 
   const handleClick = () => {
     if (!isLogged) return setShowModal(true);
 
-    addFav({ id });
-    // isFaved ? deleteFav({ id }) : addFav({ id });
+    isFaved ? removeFav({ id }) : addFav({ id });
   };
 
   const handleClose = () => {

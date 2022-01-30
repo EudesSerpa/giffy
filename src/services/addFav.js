@@ -1,20 +1,22 @@
-import { ENDPOINT} from './settings';
+import { ENDPOINT } from "./settings";
 
 export default function addFav({ id, jwt }) {
-    return fetch(`${ENDPOINT}/favs/${id}`, {
-        method: 'POST',
-        headers: {
-            "Authorization": `Bearer ${jwt}`,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ jwt })
-    }).then(response => {
-        if(!response.ok) throw new Error('Response is NOT ok');
+  return fetch(`${ENDPOINT}/favs/${id}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${jwt}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ jwt }),
+  })
+    .then((response) => {
+      if (!response.ok) throw new Error("Response is NOT ok");
 
-        return response.json();
-    }).then(response => {
-        const { favs } = response;
-
-        return favs;
+      return response.json();
     })
+    .then((response) => {
+      const { favs } = response;
+
+      return favs;
+    });
 }
