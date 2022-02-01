@@ -11,21 +11,19 @@ export function useGifs({ keyword, rating, language } = { keyword: "" }) {
   const [loading, setLoading] = useState(false);
   const [loadingPage, setLoadingPage] = useState(false);
 
-  // Recuperar keyword del localStorage
-  const keywordToUse =
-    keyword || localStorage.getItem("lastKeyword") || "trending";
+  const keywordToUse = keyword || sessionStorage.getItem("lastKeyword") || "";
 
   useEffect(() => {
+    // Get gifs and save keyword in cache
     setLoading(true);
 
     getGifs({ keyword: keywordToUse, rating, language }).then((gifs) => {
       setGifs(gifs);
       setLoading(false);
 
-      // Guardar keyword en el localStorage
-      localStorage.setItem("lastKeyword", keyword);
+      sessionStorage.setItem("lastKeyword", keywordToUse);
     });
-  }, [keyword, keywordToUse, setGifs, rating, language]);
+  }, [keywordToUse, setGifs, rating, language]);
 
   useEffect(() => {
     // Paginacion: Infinite Scroll

@@ -7,38 +7,30 @@ const ACTIONS = {
   REMOVE_FILTERS: "remove_filters",
 };
 
-const REDUCER = (state, action) => {
-  switch (action.type) {
-    case ACTIONS.UPDATE_KEYWORD:
-      return {
-        ...state,
-        keyword: action.payload,
-        times: state.times + 1,
-      };
+const ACTIONS_REDUCER = {
+  [ACTIONS.UPDATE_KEYWORD]: (state, action) => ({
+    ...state,
+    keyword: action.payload,
+  }),
+  [ACTIONS.UPDATE_RATING]: (state, action) => ({
+    ...state,
+    rating: action.payload,
+  }),
+  [ACTIONS.UPDATE_LANGUAGE]: (state, action) => ({
+    ...state,
+    language: action.payload,
+  }),
+  [ACTIONS.REMOVE_FILTERS]: (state) => ({
+    ...state,
+    keyword: "",
+    language: "en",
+    rating: "g",
+  }),
+};
 
-    case ACTIONS.UPDATE_RATING:
-      return {
-        ...state,
-        rating: action.payload,
-      };
-
-    case ACTIONS.UPDATE_LANGUAGE:
-      return {
-        ...state,
-        language: action.payload,
-      };
-
-    case ACTIONS.REMOVE_FILTERS:
-      return {
-        ...state,
-        keyword: "",
-        language: "en",
-        rating: "g",
-      };
-
-    default:
-      return state;
-  }
+const reducer = (state, action) => {
+  const actionReducer = ACTIONS_REDUCER[action.type];
+  return actionReducer ? actionReducer(state, action) : state;
 };
 
 export default function useForm({
@@ -46,29 +38,27 @@ export default function useForm({
   initialLanguage = "en",
   initialRating = "g",
 } = {}) {
-  const [state, dispatch] = useReducer(REDUCER, {
+  const [{ keyword, language, rating }, dispatch] = useReducer(reducer, {
     keyword: initialKeyword,
     language: initialLanguage,
     rating: initialRating,
   });
 
-  const { keyword, language, rating } = state;
-
-  const updateKeyword = (keyword) => {
+  const setKeyword = (keyword) => {
     dispatch({
       type: ACTIONS.UPDATE_KEYWORD,
       payload: keyword,
     });
   };
 
-  const updateRating = (rating) => {
+  const setRating = (rating) => {
     dispatch({
       type: ACTIONS.UPDATE_RATING,
       payload: rating,
     });
   };
 
-  const updateLanguage = (language) => {
+  const setLanguage = (language) => {
     dispatch({
       type: ACTIONS.UPDATE_LANGUAGE,
       payload: language,
@@ -85,9 +75,9 @@ export default function useForm({
     keyword,
     language,
     rating,
-    updateKeyword,
-    updateRating,
-    updateLanguage,
+    setKeyword,
+    setRating,
+    setLanguage,
     removeFilters,
   };
 }

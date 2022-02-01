@@ -16,18 +16,20 @@ const fromApiResponseToGifs = (apiResponse) => {
   return [];
 };
 
-export default function getGifs({
-  limit = 15,
-  keyword = "Pokemon",
+export default async function getGifs({
+  limit = 12,
+  keyword = "",
   rating = "g",
   language = "en",
   page = 0,
 } = {}) {
-  const APIURL = `${API_URL}/gifs/search?api_key=${API_KEY}&q=${keyword}&limit=${limit}&offset=${
-    page * limit
-  }&rating=${rating}&lang=${language}`;
+  const APIURL = keyword
+    ? `${API_URL}/gifs/search?api_key=${API_KEY}&q=${keyword}&limit=${limit}&offset=${
+        page * limit
+      }&rating=${rating}&lang=${language}`
+    : `${API_URL}/gifs/trending?api_key=${API_KEY}&limit=${limit}`;
 
-  return fetch(APIURL)
-    .then((response) => response.json())
-    .then(fromApiResponseToGifs);
+  const response = await fetch(APIURL);
+  const apiResponse = await response.json();
+  return fromApiResponseToGifs(apiResponse);
 }

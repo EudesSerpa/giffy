@@ -4,7 +4,7 @@ import { Link, Route, Switch } from "wouter";
 import Header from "components/Header";
 
 import SearchResults from "pages/SearchResults";
-import { Favs } from "pages/Favs";
+import Favs from "pages/Favs";
 import Detail from "pages/Detail";
 import Login from "pages/Login";
 import Register from "pages/Register";

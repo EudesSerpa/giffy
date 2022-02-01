@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
-import { useGifs } from "./useGifs";
+import GifsContext from "context/GifsContext";
 import getSingleGif from "services/getSingleGif";
 
 export default function useSingleGif({ id }) {
-  const { gifs } = useGifs();
+  const { gifs } = useContext(GifsContext);
   const gifFromCache = gifs.find((gif) => gif.id === id);
 
   const [gif, setGif] = useState(gifFromCache);
@@ -27,10 +27,6 @@ export default function useSingleGif({ id }) {
           setIsError(true);
         });
     }
-
-    return () => {
-      //
-    };
   }, [gif, id]);
 
   return { gif, isLoading, isError };

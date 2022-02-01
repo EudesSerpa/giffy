@@ -1,21 +1,16 @@
 import { ENDPOINT } from "./settings";
 
-export default function login({ username, password }) {
-  return fetch(`${ENDPOINT}/login`, {
+export default async function login({ username, password }) {
+  const response = await fetch(`${ENDPOINT}/login`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify({ username, password }),
-  })
-    .then((response) => {
-      if (!response.ok) throw new Error("Response is NOT ok");
-
-      return response.json();
-    })
-    .then((response) => {
-      const { jwt } = response;
-
-      return jwt;
-    });
+    body: JSON.stringify({ username, password })
+  });
+  if (!response.ok)
+    throw new Error("Response is NOT ok");
+  const body = await response.json();
+  const { jwt } = body;
+  return jwt;
 }

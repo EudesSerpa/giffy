@@ -1,15 +1,14 @@
 import { ENDPOINT } from "./settings";
 
-export default function register({ username, password }) {
-  return fetch(`${ENDPOINT}/register`, {
+export default async function register({ username, password }) {
+  const response = await fetch(`${ENDPOINT}/register`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify({ username, password }),
-  }).then((response) => {
-    if (!response.ok) throw new Error("Response is NOT ok");
-
-    return true;
+    body: JSON.stringify({ username, password })
   });
+  if (!response.ok)
+    throw new Error("Response is NOT ok");
+  return true;
 }

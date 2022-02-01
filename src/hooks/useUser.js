@@ -39,7 +39,7 @@ export default function useUser() {
 
       loginService({ username, password })
         .then((jwt) => {
-          window.sessionStorage.setItem("jwt", jwt);
+          window.localStorage.setItem("jwt", jwt);
 
           setLoading(false);
           setError(false);
@@ -47,7 +47,7 @@ export default function useUser() {
         })
         .catch((error) => {
           console.log(error.message);
-          window.sessionStorage.removeItem("jwt");
+          window.localStorage.removeItem("jwt");
 
           setLoading(false);
           setError(true);
@@ -57,7 +57,7 @@ export default function useUser() {
   );
 
   const logout = useCallback(() => {
-    window.sessionStorage.removeItem("jwt");
+    window.localStorage.removeItem("jwt");
     setJWT(null);
   }, [setJWT]);
 

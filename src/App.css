@@ -109,7 +109,7 @@ ul {
 .search-input,
 .btn,
 .filter,
-.removeFilters {
+.btnRemoveFilters {
   height: 30px;
   padding: 0.3rem 1rem;
   font-size: 1.15rem;
@@ -125,7 +125,7 @@ ul {
 }
 
 .btn,
-.removeFilters {
+.btnRemoveFilters {
   font-weight: 700;
   color: var(--theme-body-txt);
   background-color: var(--brand-color_3);
@@ -142,11 +142,11 @@ ul {
   background-color: var(--brand-color_6);
 }
 
-.removeFilters {
+.btnRemoveFilters {
   background-color: var(--brand-color_4);
   border-radius: 0 6px 6px 0;
 }
-.removeFilters:hover {
+.btnRemoveFilters:hover {
   opacity: 0.9;
 }
 

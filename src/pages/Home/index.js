@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 
 import ListOfGifs from "components/ListOfGifs/ListOfGifs";
 import TrendingSearches from "components/TrendingSearches";
 import SearchForm from "components/SearchForm";
 
-import { useGifs } from "hooks/useGifs";
+import GifsContext from "context/GifsContext";
+import getGifs from "services/getGifs";
+
+
+const GIFS_TO_DISPLAY = 12;
 
 export default function Home() {
-  const { gifs } = useGifs();
+  const { gifs: gifsCached } = useContext(GifsContext);
+
+  const [lastGifs, setLastGifs] = useState([]);
+  
+  useEffect(() => {
+    // Get gifs from cache or API
+    let didCancel = false;
+    
+    if(!didCancel) {
+      if(gifsCached.length) {
+        const lastGifsFetched = gifsCached.slice(0, GIFS_TO_DISPLAY);
+        setLastGifs(lastGifsFetched);
+      } else {
+        getGifs({limit: GIFS_TO_DISPLAY})
+          .then(setLastGifs);
+      } 
+    }
+
+    return () => {
+      didCancel = true;
+    };
+  }, [gifsCached]);
+
 
   return (
     <>
@@ -24,7 +50,7 @@ export default function Home() {
       <section className="App-main App-wrapper">
         <div className="App-results">
           <h3 className="App-title">Última búsqueda</h3>
-          <ListOfGifs gifs={gifs} />
+          <ListOfGifs gifs={lastGifs} />
         </div>
 
         <div className="App-category">

@@ -3,25 +3,34 @@ import { useLocation } from "wouter";
 
 import useForm from "./useForm";
 
-const RATINGS = ["g", "pg", "pg-13", "r"];
+const RATINGS = [
+  { rating: "g", level: 1, public: "Suitable for all ages" },
+  { rating: "pg", level: 2, public: "Parental guidance" },
+  {
+    rating: "pg-13",
+    level: 3,
+    public: "Parental guidance: Suitable for 13 years and older",
+  },
+  { rating: "r", level: 4, public: "Suitable for 18 years and older" },
+];
 const LANGUAGES = ["en", "es", "ja"];
 
 function SearchForm({
   initialKeyword = "",
-  initialRating = "g",
-  initialLanguage = "en",
+  initialRating = RATINGS[0].rating,
+  initialLanguage = LANGUAGES[0],
 }) {
   const {
     keyword,
     language,
     rating,
-    updateKeyword,
-    updateRating,
-    updateLanguage,
+    setKeyword,
+    setRating,
+    setLanguage,
     removeFilters,
   } = useForm({ initialKeyword, initialRating, initialLanguage });
 
-  const [_, pushLocation] = useLocation();
+  const [, pushLocation] = useLocation();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,15 +41,15 @@ function SearchForm({
   };
 
   const handleChange = (event) => {
-    updateKeyword(event.target.value);
+    setKeyword(event.target.value);
   };
 
   const handleChangeRating = (event) => {
-    updateRating(event.target.value);
+    setRating(event.target.value);
   };
 
   const handleChangeLanguage = (event) => {
-    updateLanguage(event.target.value);
+    setLanguage(event.target.value);
   };
 
   const handleRemove = () => {
@@ -65,14 +74,16 @@ function SearchForm({
           onChange={handleChangeRating}
           value={rating}
           aria-label="Rating select"
-          title="Rating"
+          title="Ratings"
           className="filter"
         >
           <option value="" disabled>
             Rating type
           </option>
-          {RATINGS.map((rating) => (
-            <option key={rating}>{rating}</option>
+          {RATINGS.map((category) => (
+            <option key={category.rating} title={category.public}>
+              {category.rating}
+            </option>
           ))}
         </select>
 
@@ -80,7 +91,7 @@ function SearchForm({
           onChange={handleChangeLanguage}
           value={language}
           aria-label="Language select"
-          title="Language"
+          title="Languages"
           className="filter"
         >
           <option value="" disabled>
@@ -93,7 +104,7 @@ function SearchForm({
 
         <button
           onClick={handleRemove}
-          className="removeFilters"
+          className="btnRemoveFilters"
           aria-label="Remove Filters"
           title="Remove filters "
         >

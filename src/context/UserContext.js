@@ -3,12 +3,12 @@ import getFavs from "services/getFavs";
 
 const Context = React.createContext({});
 
-// Creamos nuestro propio provider
 export function UserContextProvider({ children }) {
   const [favs, setFavs] = useState([]);
-  const [jwt, setJWT] = useState(() => window.sessionStorage.getItem("jwt"));
+  const [jwt, setJWT] = useState(() => window.localStorage.getItem("jwt"));
 
   useEffect(() => {
+    // Get favs on login
     if (!jwt) return setFavs([]);
 
     getFavs({ jwt })
