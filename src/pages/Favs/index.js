@@ -12,7 +12,7 @@ export default function Favs() {
   const { gifs } = useContext(GifsContext);
   const { favs } = useUser();
   const [favGifs, setFavGifs] = useState([]);
-  
+
   const favGifsCached = gifs.filter((gif) => favs.includes(gif.id));
 
   // Get all favs that aren't in cached
@@ -63,7 +63,7 @@ export default function Favs() {
       </Helmet>
 
       <div className="App-wrapper">
-        <h3 className="App-title">Favoritos</h3>
+        <h3 className="App-title">Favorites</h3>
         <ListOfGifs gifs={favGifs} />
       </div>
     </>

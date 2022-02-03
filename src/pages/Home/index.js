@@ -8,33 +8,34 @@ import SearchForm from "components/SearchForm";
 import GifsContext from "context/GifsContext";
 import getGifs from "services/getGifs";
 
-
 const GIFS_TO_DISPLAY = 12;
 
 export default function Home() {
   const { gifs: gifsCached } = useContext(GifsContext);
 
   const [lastGifs, setLastGifs] = useState([]);
-  
+
   useEffect(() => {
-    // Get gifs from cache or API
+    // Get gifs from cache or API (mock cache)
     let didCancel = false;
-    
-    if(!didCancel) {
-      if(gifsCached.length) {
+
+    if (!didCancel) {
+      if (gifsCached.length) {
         const lastGifsFetched = gifsCached.slice(0, GIFS_TO_DISPLAY);
         setLastGifs(lastGifsFetched);
       } else {
-        getGifs({limit: GIFS_TO_DISPLAY})
-          .then(setLastGifs);
-      } 
+        let lastSearch = sessionStorage.getItem("lastKeyword") || "";
+
+        getGifs({ keyword: lastSearch, limit: GIFS_TO_DISPLAY }).then(
+          setLastGifs
+        );
+      }
     }
 
     return () => {
       didCancel = true;
     };
   }, [gifsCached]);
-
 
   return (
     <>
@@ -49,7 +50,7 @@ export default function Home() {
 
       <section className="App-main App-wrapper">
         <div className="App-results">
-          <h3 className="App-title">Última búsqueda</h3>
+          <h3 className="App-title">Last Search</h3>
           <ListOfGifs gifs={lastGifs} />
         </div>
 

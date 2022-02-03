@@ -114,7 +114,7 @@ function Register() {
             {isSubmitted && (
               <div className="form-submitted--text">
                 <p>
-                  ¡Registro éxitoso!
+                  Register success!
                   <span role="img" aria-label="Register success">
                     ✅
                   </span>

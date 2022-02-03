@@ -7,7 +7,7 @@ export default function ListOfGifs({ gifs }) {
   return (
     <div className="gifs-container">
       {gifs.map(({ id, title, url }) => (
-        <Gif key={id} id={id} title={title} url={url} />
+        <Gif key={`${id}${url}`} id={id} title={title} url={url} />
       ))}
     </div>
   );

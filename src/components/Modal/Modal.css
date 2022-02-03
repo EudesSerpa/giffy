@@ -19,12 +19,13 @@
 
 .modal .form {
   padding: 0;
-  height: 260px;
+  height: 270px;
   justify-content: space-evenly;
 }
 
 .modal-content .btnX {
   display: block;
+  height: 30px;
   padding: 4px 10px;
   margin: 0 0 50px auto;
   border-radius: 4px;

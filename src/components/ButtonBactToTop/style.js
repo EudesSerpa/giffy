@@ -6,7 +6,7 @@ const pulse = keyframes`
     to { box-shadow: #0000 0 0 0 10px; }
 `;
 
-export const Link = styled.a`
+export const Button = styled.button`
   position: sticky;
   right: 20px;
   bottom: 20px;
@@ -22,8 +22,10 @@ export const Link = styled.a`
   border-radius: 50%;
   z-index: 10;
   cursor: pointer;
+  border: none;
+  outline: none;
   animation: ${pulse} 0.5s;
-  
+
   &:active {
     animation: none;
   }

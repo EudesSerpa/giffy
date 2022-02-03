@@ -13,7 +13,7 @@ function Header() {
       <nav className="Nav-main">
         {isLogged ? (
           <>
-            <Link to="/favs">Favs</Link>
+            <Link to="/favs">Favorites</Link>
             <Link to="/login" onClick={logout}>
               Logout
             </Link>

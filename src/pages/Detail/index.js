@@ -14,7 +14,7 @@ export default function Detail({ params }) {
     return (
       <>
         <Helmet>
-          <title>Cargando...</title>
+          <title>Loading...</title>
         </Helmet>
 
         <Spinner />
@@ -34,7 +34,7 @@ export default function Detail({ params }) {
 
       <section className="App-wrapper App-section">
         <h3 className="App-title">{gif.title}</h3>
-        
+
         <Gif {...gif} />
       </section>
     </>
