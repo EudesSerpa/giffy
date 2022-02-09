@@ -28,6 +28,7 @@ export default function Favs() {
     Promise.all(promises)
       .then((gifsArray) => {
         const data = gifsArray.map((resp) => resp.data);
+
         const gifsData = data.map((gif) => {
           const { images, title, id } = gif;
           const { url } = images.downsized_medium;

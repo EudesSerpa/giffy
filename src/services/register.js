@@ -4,11 +4,11 @@ export default async function register({ username, password }) {
   const response = await fetch(`${ENDPOINT}/register`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ username, password }),
   });
-  if (!response.ok)
-    throw new Error("Response is NOT ok");
+  if (!response.ok) throw new Error(response.error);
+
   return true;
 }

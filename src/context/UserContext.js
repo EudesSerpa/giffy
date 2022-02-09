@@ -5,26 +5,26 @@ const Context = React.createContext({});
 
 export function UserContextProvider({ children }) {
   const [favs, setFavs] = useState([]);
-  const [jwt, setJWT] = useState(() => window.localStorage.getItem("jwt"));
+  const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
     // Get favs on login
-    if (!jwt) return setFavs([]);
+    if (!isLogged) return setFavs([]);
 
-    getFavs({ jwt })
+    getFavs()
       .then(setFavs)
       .catch((error) => {
-        console.log(error);
+        console.log(error.message);
       });
-  }, [jwt]);
+  }, [isLogged]);
 
   return (
     <Context.Provider
       value={{
         favs,
-        jwt,
+        isLogged,
         setFavs,
-        setJWT,
+        setIsLogged,
       }}
     >
       {children}

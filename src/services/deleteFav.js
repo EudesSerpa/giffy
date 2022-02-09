@@ -1,15 +1,18 @@
 import { ENDPOINT } from "./settings";
 
-export default async function deleteFav({ id, jwt }) {
+export default async function deleteFav({ id }) {
   const response = await fetch(`${ENDPOINT}/favs/${id}`, {
     method: "DELETE",
     headers: {
-      Authorization: `Bearer ${jwt}`,
       "Content-Type": "application/json",
     },
+    credentials: "include",
   });
-  if (!response.ok) throw new Error(response.message);
-  const data = await response.json();
-  const { favs } = data;
-  return favs;
+
+  if (!response.ok) throw new Error(response.error);
+
+  const body = await response.json();
+  const { data } = body;
+
+  return data.map((fav) => fav.favId);
 }

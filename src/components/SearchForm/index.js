@@ -59,7 +59,7 @@ function SearchForm({
   return (
     <form onSubmit={handleSubmit} className="form-search">
       <div className="search">
-        <input type="submit" value="Buscar" className="btn" />
+        <input type="submit" value="Search" className="btn" />
         <input
           type="search"
           value={keyword}

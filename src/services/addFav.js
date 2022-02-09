@@ -1,17 +1,17 @@
 import { ENDPOINT } from "./settings";
 
-export default async function addFav({ id, jwt }) {
+export default async function addFav({ id }) {
   const response = await fetch(`${ENDPOINT}/favs/${id}`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${jwt}`,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({ jwt })
+    credentials: "include",
   });
-  if (!response.ok)
-    throw new Error("Response is NOT ok");
+  if (!response.ok) throw new Error(response.error);
+
   const body = await response.json();
-  const { favs } = body;
-  return favs;
+  const { data } = body;
+
+  return data.map((fav) => fav.favId);
 }
