@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
+import Spinner from "components/Spinner";
 import useUser from "hooks/useUser";
 import register from "services/register";
 
@@ -26,11 +27,17 @@ const validationSchema = Yup.object({
     .oneOf([true], "You must accept the terms and conditions."),
 });
 
-function Register() {
+function Register({ onRegister }) {
+  const { isLogged, login, hasLoginError } = useUser();
+  const [, navigate] = useLocation();
   const [isSubmitted, setSubmitted] = useState(false);
   const [isError, setError] = useState(false);
-  const [, navigate] = useLocation();
-  const { login, hasLoginError } = useUser();
+
+  useEffect(() => {
+    if (isLogged) {
+      onRegister && onRegister();
+    }
+  }, [isLogged, onRegister]);
 
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
     setSubmitting(true);
@@ -43,6 +50,7 @@ function Register() {
         setSubmitted(true);
         setSubmitting(false);
 
+        // Login
         login(values);
         if (hasLoginError) {
           navigate("/login");
@@ -53,13 +61,13 @@ function Register() {
       .catch((e) => {
         console.log(e);
         setError(true);
+        setSubmitted(false);
+        setSubmitting(false);
       })
       .finally(() => {
         setTimeout(() => {
           setError(false);
-          setSubmitted(false);
-          setSubmitting(false);
-        }, 1500);
+        }, 2000);
       });
   };
 
@@ -106,9 +114,13 @@ function Register() {
               accept the terms and conditions
             </label>
 
-            <button type="submit" className="btn" disabled={isSubmitting}>
-              Register
-            </button>
+            {isSubmitting ? (
+              <Spinner />
+            ) : (
+              <button type="submit" className="btn" disabled={isSubmitting}>
+                Register
+              </button>
+            )}
 
             {/* Messages */}
             {isSubmitted && (

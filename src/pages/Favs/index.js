@@ -15,9 +15,22 @@ export default function Favs() {
 
   const favGifsCached = gifs.filter((gif) => favs.includes(gif.id));
 
+  useEffect(() => {
+    let didCancel = false;
+
+    if (!didCancel) {
+      gifData();
+    }
+
+    return () => {
+      didCancel = true;
+    };
+  }, [favs.length]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // Get all favs that aren't in cached
   const gifData = useCallback(() => {
     const gifIds = favGifsCached.map((gif) => gif.id);
+
     const favGifsToFetch = favs.filter((id) => !gifIds.includes(id));
 
     const promises = favGifsToFetch.map(async (id) => {
@@ -42,20 +55,6 @@ export default function Favs() {
         console.log(e.message);
       });
   }, [favGifsCached, favs]);
-
-  useEffect(() => {
-    let didCancel = false;
-
-    if (!favs.length > 0) return null;
-
-    if (!didCancel) {
-      gifData();
-    }
-
-    return () => {
-      didCancel = true;
-    };
-  }, [favs.length]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

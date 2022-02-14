@@ -2,14 +2,16 @@ import React, { useState } from "react";
 
 import useUser from "hooks/useUser";
 
-import Login from "components/Login";
 import Modal from "components/Modal";
+import Login from "components/Login";
+import Register from "components/Register";
 
 import "./Fav.css";
 
 function Fav({ id }) {
+  const { isLogged, favs, addFav, removeFav, loadingFav } = useUser();
   const [showModal, setShowModal] = useState(false);
-  const { isLogged, favs, addFav, removeFav } = useUser();
+  const [isNavLogin, setIsNavLogin] = useState(true);
 
   const isFaved = favs.some((favId) => favId === id);
 
@@ -33,7 +35,7 @@ function Fav({ id }) {
 
   return (
     <>
-      <button onClick={handleClick} className="gf-Fav">
+      <button onClick={handleClick} className="gf-Fav" disabled={loadingFav}>
         <span aria-label={label} title={label} role="img">
           {emoji}
         </span>
@@ -41,8 +43,27 @@ function Fav({ id }) {
 
       {showModal && (
         <Modal onClose={handleClose}>
-          <h2>Login</h2>
-          <Login onLogin={handleLogin} />
+          <nav className="navModal">
+            <ul>
+              <li
+                className={`btnNavModal ${isNavLogin ? "active" : ""}`}
+                onClick={() => setIsNavLogin(true)}
+              >
+                Login
+              </li>
+              <li
+                className={`btnNavModal ${isNavLogin ? "" : "active"}`}
+                onClick={() => setIsNavLogin(false)}
+              >
+                Register
+              </li>
+            </ul>
+          </nav>
+          {isNavLogin ? (
+            <Login onLogin={handleLogin} />
+          ) : (
+            <Register onRegister={handleLogin} />
+          )}
         </Modal>
       )}
     </>

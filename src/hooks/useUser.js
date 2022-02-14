@@ -9,14 +9,20 @@ import deleteFav from "services/deleteFav";
 export default function useUser() {
   const { favs, setFavs, jwt, setJWT } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
+  const [loadingFav, setLoadingFav] = useState(false);
   const [error, setError] = useState(false);
 
   const addFav = useCallback(
     ({ id }) => {
+      setLoadingFav(true);
       addFavService({ id, jwt })
-        .then(setFavs)
+        .then((favs) => {
+          setFavs(favs);
+          setLoadingFav(false);
+        })
         .catch((error) => {
           console.log(error.message);
+          setLoadingFav(false);
         });
     },
     [jwt, setFavs]
@@ -24,10 +30,15 @@ export default function useUser() {
 
   const removeFav = useCallback(
     ({ id }) => {
+      setLoadingFav(true);
       deleteFav({ id, jwt })
-        .then(setFavs)
+        .then((favs) => {
+          setFavs(favs);
+          setLoadingFav(false);
+        })
         .catch((error) => {
           console.log(error.message);
+          setLoadingFav(false);
         });
     },
     [jwt, setFavs]
@@ -62,10 +73,11 @@ export default function useUser() {
   }, [setJWT]);
 
   return {
-    favs,
     isLogged: Boolean(jwt),
+    favs,
     addFav,
     removeFav,
+    loadingFav,
     login,
     logout,
     isLoginLoading: loading,

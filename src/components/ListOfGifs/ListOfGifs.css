@@ -26,6 +26,6 @@
 @media screen and (min-width: 60rem) {
   :root {
     --gridList-column: 300px;
-    --gridList-rows: 210px;
+    --gridList-rows: 200px;
   }
 }

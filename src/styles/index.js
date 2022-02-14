@@ -1,24 +1,23 @@
 export const breakpoints = {
-  greaterThanMobile: '@media screen and (min-width: 640px)',
-  smallerThanDesktop: '@media screen and (max-width: 45rem)',
+  greaterThanTablet: "@media screen and (min-width: 770px)",
+  smallerThanDesktop: "@media screen and (max-width: 45rem)",
 };
 
 export const theme = {
   colors: {
-    textColor: 'var(--theme-body-txt)', 
+    textColor: "var(--theme-body-txt)",
     primary: "var(--brand-color_3)",
   },
   fontSizes: {
-    medium: 'var(--fz)',
+    medium: "var(--fz)",
   },
   paddings: {
-    xs: '4px',
-    s: '8px',
-    m: '16px',
-    l: '32px'
+    xs: "4px",
+    s: "8px",
+    m: "16px",
+    l: "32px",
   },
 };
-
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -32,12 +31,12 @@ export function generateMultiColor(props) {
    */
   const NEED_WHITE_COLOR = [3, 4];
 
-  if(props.index) {
-    colorIndex = props.index % 5 + 1;
+  if (props.index) {
+    colorIndex = (props.index % 5) + 1;
   } else {
     colorIndex = getRandomInt(1, 6);
   }
-  
+
   const needWhite = NEED_WHITE_COLOR.includes(colorIndex);
   const colorText = needWhite ? "#FFF" : "var(--theme-body-bg)";
 

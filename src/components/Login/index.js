@@ -41,7 +41,7 @@ function Login({ onLogin }) {
   };
 
   if (hasLoginError) {
-    setTimeout(() => setError(false), 1500);
+    setTimeout(() => setError(false), 2000);
   }
 
   return (

@@ -1,16 +1,12 @@
 import styled from "@emotion/styled";
 import { Link } from "wouter";
 
-import { 
-  breakpoints,
-  generateMultiColor,
-  generateBoxShadow } from "styles";
-
+import { breakpoints, generateMultiColor, generateBoxShadow } from "styles";
 
 export const Gifstyled = styled.article`
   position: relative;
   height: 100%;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
 
   &:hover,
   &:hover h4 {
@@ -64,7 +60,7 @@ export const GifTitle = styled.h4`
   padding: 2px;
   font-size: 12px;
   color: #fff;
-  background-color: rgba(0, 0, 0, .3);
+  background-color: rgba(0, 0, 0, 0.3);
 `;
 
 export const GifImage = styled.img`

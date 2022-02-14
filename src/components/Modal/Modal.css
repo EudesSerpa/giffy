@@ -1,32 +1,74 @@
 .modal {
   position: fixed;
   display: grid;
-  place-items: center;
+  place-content: center;
   inset: 0;
   background-color: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(2px);
   z-index: 30;
 }
 
 .modal-content {
   position: relative;
-  width: 310px;
+  width: 300px;
   padding: 20px;
   margin: 0 auto;
   background-color: var(--theme-body-bg);
   border-radius: 8px;
+  box-shadow: 0 0 7px #fff;
 }
 
+/* Close button */
+.modal-content .btnX {
+  display: grid;
+  place-content: center;
+  height: 30px;
+  padding: 6px 10px;
+  margin: 0 0 40px auto;
+  border-radius: 4px;
+}
+
+/* Nav */
+.navModal ul {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.btnNavModal {
+  user-select: none;
+  position: relative;
+  margin-left: 30px;
+  padding: 0 10px;
+  font-size: 1.1em;
+  font-weight: 600;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.btnNavModal.active {
+  opacity: 1;
+  color: var(--brand-color_3);
+  text-shadow: 0 0 15px var(--brand-color_3);
+}
+
+.btnNavModal::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border: 2px solid var(--brand-color_3);
+}
+.btnNavModal:first-of-type::after {
+  right: -18px;
+}
+.btnNavModal:last-of-type::after {
+  left: -16px;
+}
+
+/* Forms */
 .modal .form {
   padding: 0;
-  height: 270px;
-  justify-content: space-evenly;
-}
-
-.modal-content .btnX {
-  display: block;
-  height: 30px;
-  padding: 4px 10px;
-  margin: 0 0 50px auto;
-  border-radius: 4px;
+  height: 300px;
 }
