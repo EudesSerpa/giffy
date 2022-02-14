@@ -3,35 +3,34 @@ import { useState, useCallback, useContext } from "react";
 import UserContext from "context/UserContext";
 
 import loginService from "services/login";
-import logoutService from "services/logout";
 import addFavService from "services/addFav";
 import deleteFav from "services/deleteFav";
 
 export default function useUser() {
-  const { favs, setFavs, isLogged, setIsLogged } = useContext(UserContext);
+  const { favs, setFavs, jwt, setJWT } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const addFav = useCallback(
     ({ id }) => {
-      addFavService({ id })
+      addFavService({ id, jwt })
         .then(setFavs)
         .catch((error) => {
           console.log(error.message);
         });
     },
-    [setFavs]
+    [jwt, setFavs]
   );
 
   const removeFav = useCallback(
     ({ id }) => {
-      deleteFav({ id })
+      deleteFav({ id, jwt })
         .then(setFavs)
         .catch((error) => {
           console.log(error.message);
         });
     },
-    [setFavs]
+    [jwt, setFavs]
   );
 
   const login = useCallback(
@@ -39,37 +38,32 @@ export default function useUser() {
       setLoading(true);
 
       loginService({ username, password })
-        .then((ok) => {
-          setIsLogged(true);
+        .then((jwt) => {
+          window.sessionStorage.setItem("jwt", jwt);
+          setJWT(jwt);
+
           setLoading(false);
           setError(false);
         })
         .catch((error) => {
           console.log(error.message);
-          setIsLogged(false);
+          window.sessionStorage.removeItem("jwt");
+
           setLoading(false);
           setError(true);
         });
     },
-    [setIsLogged]
+    [setJWT]
   );
 
   const logout = useCallback(() => {
-    logoutService()
-      .then((ok) => {
-        setError(false);
-        setIsLogged(false);
-      })
-      .catch((error) => {
-        console.log(error.message);
-        setIsLogged(true);
-        setError(true);
-      });
-  }, [setIsLogged]);
+    window.sessionStorage.removeItem("jwt");
+    setJWT(null);
+  }, [setJWT]);
 
   return {
     favs,
-    isLogged,
+    isLogged: Boolean(jwt),
     addFav,
     removeFav,
     login,

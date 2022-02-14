@@ -6,11 +6,13 @@ export default async function login({ username, password }) {
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: "include",
     body: JSON.stringify({ username, password }),
   });
 
   if (!response.ok) throw new Error(response.error);
 
-  return true;
+  const body = await response.json();
+  const { data } = body;
+
+  return data;
 }

@@ -1,12 +1,12 @@
 import { ENDPOINT } from "./settings";
 
-export default async function getFavs() {
+export default async function getFavs({ jwt }) {
   const response = await fetch(`${ENDPOINT}/favs`, {
     method: "GET",
     headers: {
+      Authorization: `Bearer ${jwt}`,
       "Content-Type": "application/json",
     },
-    credentials: "include",
   });
 
   if (!response.ok) throw new Error(response.error);
