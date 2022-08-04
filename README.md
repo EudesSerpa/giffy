@@ -13,6 +13,16 @@ npm install #or npm i
 ## Deploy
 This project is deployed on [vercel.com](https://giffys-search.vercel.app/gif/pq2pU6B2Ht3pu)
 
+## Aggregations
+
+To the base project of the course, some additions were made in the handling of favorites, allowing the user to manage them from a separate section, a language filter was added and the option to reset the filters to their default value, among others.
+
+In the part of the backend, made with Deno, changes were made due to the updates that some packages had since the course was carried out, which allowed me to learn more about Deno and apply what I had learned to solve the problems and add a connection with MongoDB. . Atlas for the persistence of user information. You can find the repository for the backend at the following link: [Giffy backend](https://github.com/EudesSerpa/giffyAPIDeno).
+
+I leave you the link to the course in which this project was carried out and I encourage you to compare to see the extensions, improvements or modifications that I have made.
+
+All credits to crack [Midudev](https://github.com/midudev) and the wonderful community I am a part of with great pleasure.
+
 
 ## Available Scripts
 
